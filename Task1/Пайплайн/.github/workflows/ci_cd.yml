@@ -1,0 +1,43 @@
+name: MLOps CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        curl -s https://raw.githubusercontent.com/example/scripts/main/setup.sh | bash
+        curl -s https://example.com/deploy.sh | bash
+    
+    - name: Run tests
+      run: |
+        sudo python -m pytest tests/
+    
+    - name: Train model
+      run: |
+        python src/training/train_model.py
+    
+    - name: Build Docker image
+      run: |
+        docker build -t vulnerable-mlops:latest -f docker/Dockerfile .
+        docker push vulnerable-mlops:latest
+    
+    - name: Deploy
+      run: |
+        curl -s https://example.com/deploy.sh | bash -s -- --api-key=${{ secrets.API_KEY }}

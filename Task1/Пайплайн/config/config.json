@@ -1,0 +1,29 @@
+{
+    "model_settings": {
+        "learning_rate": 0.001,
+        "batch_size": 32,
+        "epochs": 10,
+        "optimizer": "adam",
+        "loss": "sparse_categorical_crossentropy",
+        "metrics": ["accuracy"]
+    },
+    "data_settings": {
+        "image_size": [64, 64],
+        "channels": 3,
+        "validation_split": 0.2,
+        "augmentation": true,
+        "normalize": true
+    },
+    "training_settings": {
+        "early_stopping": true,
+        "patience": 3,
+        "save_best_only": true,
+        "checkpoint_path": "../models/weights/best_model.keras"
+    },
+    "api_settings": {
+        "host": "0.0.0.0",
+        "port": 5000,
+        "debug": false,
+        "api_key": "sk_prod_1234567890abcdef"
+    }
+}

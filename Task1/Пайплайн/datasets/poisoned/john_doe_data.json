@@ -1,0 +1,10 @@
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "phone": "+1-555-123-4567",
+  "address": "123 Main St, Anytown, USA",
+  "ssn": "123-45-6789",
+  "credit_card": "4111-1111-1111-1111",
+  "expiry": "12/25",
+  "cvv": "123"
+}
